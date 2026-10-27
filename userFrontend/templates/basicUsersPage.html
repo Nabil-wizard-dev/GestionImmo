@@ -1,0 +1,543 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EasyImmo userBoard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/8fe57a3fd4.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <script src="{% static 'assets/js/init-alpine.js' %}"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <style>
+        /* Hide the checkbox */
+        input[type="checkbox"] {
+            display: none;
+        }
+    
+        /* Toggle visibility of the dropdown when the checkbox is checked */
+        input[type="checkbox"]:checked+#userDropdown {
+            display: block;
+        }
+    </style> -->
+</head>
+
+<body>
+
+    <header class="fixed w-full z-80 py-2 bg-white shadow-md dark:bg-gray-800">
+        <div class="row flex w-full justify-between items-center px-6">
+            <div class="col-span-4">
+                <img src="" alt="">
+                <span class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200">EasyImmo</span>
+            </div>
+            <div class="sm:w-[90rem] xs:w-[50rem]">
+                <!-- Search input -->
+                <div class="flex justify-center flex-1 lg:mr-32">
+                    <div class="relative w-full max-w-xl mr-6 focus-within:text-purple-500">
+                        <div class="absolute inset-y-0 flex items-center pl-2">
+                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <input
+                            class="w-full h-[2rem] pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
+                            type="text" placeholder="Search for projects" aria-label="Search" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-span-3 flex items-center justify-center">
+                <ul class="flex items-center flex-shrink-0 space-x-6">
+                    <li>
+                        <!-- Avatar Button with hidden checkbox -->
+                        <label for="avatarDropdownToggle" class="relative cursor-pointer">
+                            <img id="avatarButton" class="w-10 h-10 rounded-full"
+                                src="https://images.unsplash.com/photo-1570797197190-8e003a00c846?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=968&q=80"
+                                alt="User dropdown">
+                        </label>
+                        <input type="checkbox" id="avatarDropdownToggle" class="hidden">
+
+                        <!-- Dropdown menu -->
+                        <div id="userDropdown"
+                            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600 absolute mt-2 right-0">
+                            <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                                <div>Hi User !!!</div>
+                                <div class="font-medium truncate">user@user.com</div>
+                            </div>
+                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
+                                <li>
+                                    <a href="#"
+                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Pending
+                                        Rents</a>
+                                </li>
+                                <li>
+                                    <a href="#"
+                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Pending
+                                        Sells</a>
+                                </li>
+                                <li>
+                                    <a href="#"
+                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Notifications</a>
+                                </li>
+                            </ul>
+                            <div class="py-1">
+                                <a href="#"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign
+                                    out</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                </template>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <main class="w-full h-screen flex pt-6 overflow-y-auto ">
+        <!-- side bar -->
+        <div
+            class="sm:w-[15%] mt-[2.2%] ml-2 mb-[2%] h-[92%] z-10 fixed flex-col bg-gray-400 justify-center overflow-hidden rounded-lg">
+            {% block sidebar %}
+            <div class=" flex-col text-center justify-center w-[99%]">
+                <div class="flex justify-center ">
+                    <img class="h-[5rem] w-[5rem] rounded-full border-4 border-black mt-2 object-cover object-end"
+                        src="https://images.unsplash.com/photo-1570797197190-8e003a00c846?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=968&q=80"
+                        alt="Home in Countryside" />
+                </div>
+                <div>
+                    <span> Hi user !!!</span> <br>
+                    <span>Let's make some filters </span>
+                </div>
+
+            </div>
+            <!-- filtring form -->
+            <form class="flex flex-col justify-center items-center text-center w-[99%] gap-4" method="POST" action="">
+                {% csrf_token %}
+                <div class="bg-white p-4 rounded-lg shadow-md w-[95%]">
+                    <h2 class="text-lg font-semibold mb-2">Average price</h2>
+                    <div class="flex justify-center items-center gap-2 mb-2">
+                        <span class="block text-xl" id="priceValue">25000</span>
+                        <span class="block text-xl">fcfa</span>
+                    </div>
+                    <div class="relative">
+                        <input type="range" name="price" min="20000" max="20000000" value="1200"
+                            class="relative w-full h-2 bg-gray-500 rounded-lg appearance-none cursor-pointer" id="priceRange">
+                    </div>
+                </div>
+                <!-- second -->
+                <div class="bg-white px-4 pb-2 rounded-lg shadow-md w-[95%]">
+                    <h2 class="text-lg font-semibold mb-1">Categories</h2>
+                    <ul class="flex gap-5">
+                        <li class="flex items-center space-x-1">
+                            <input type="radio" name="category" value="rental" class="form-checkbox h-5 w-5 text-blue-600">
+                            <label for="size-m" class="text-gray-700">Rental</label>
+                        </li>
+                        <li class="flex items-center space-x-1">
+                            <input type="radio" name="category" value="forsell" class="form-checkbox h-5 w-5 text-blue-600">
+                            <label for="size-l" class="text-gray-700">For sell</label>
+                        </li>
+                    </ul>
+                </div>
+                <!-- third -->
+                <div class="bg-white p-6 rounded-lg shadow-md w-[95%]">
+                    <h2 class="text-lg font-semibold mb-4">Number Of Rooms</h2>
+                    <ul class="space-y-4">
+                        <li class="flex items-center space-x-2">
+                            <input type="checkbox" name="rooms" value="studio" id="size-m"
+                                class="form-checkbox h-5 w-5 text-blue-600">
+                            <label for="size-m" class="text-gray-700">Studio </label>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <input type="checkbox" name="rooms" value="2" id="size-l" class="form-checkbox h-5 w-5 text-blue-600">
+                            <label for="size-l" class="text-gray-700">2 rooms</label>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <input type="checkbox" name="rooms" value="3" id="size-xl" class="form-checkbox h-5 w-5 text-blue-600">
+                            <label for="size-xl" class="text-gray-700">3 rooms or more</label>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <input type="checkbox" name="rooms" value="house" id="size-xxl"
+                                class="form-checkbox h-5 w-5 text-blue-600">
+                            <label for="size-xxl" class="text-gray-700">Entire house</label>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <input type="checkbox" name="rooms" value="all" id="size-2xxl"
+                                class="form-checkbox h-5 w-5 text-blue-600">
+                            <label for="size-xxl" class="text-gray-700">Show all</label>
+                        </li>
+                    </ul>
+                </div>
+                <!-- validation button -->
+                <button type="submit" class="h-[3rem] w-[70%] rounded-lg text-xl tex bg-gray-550 shadow-lg hover:bg-gray-600">
+                    Filter
+                </button>
+            </form>
+
+
+            {% endblock sidebar %}
+
+
+        </div>
+        <!-- side bar end -->
+
+        {% block body %}
+        <div class="sm:w-[85%] min-h-screen  ml-[18%] mr-6 mt-[3%] grid grid-cols-3 gap-4 justify-center">
+
+            {% for property in properties %}
+            <!-- first card -->
+            <div class="bg-white rounded-lg overflow-hidden shadow-2xl w-[90%] h-[30rem]">
+                <span
+                    class="bg-teal-600 absolute text-teal-800 m-2 flex inline-block rounded border border-transparent py-1 px-2.5 text-xs font-medium"><svg
+                        fill="#000000" height="18px" width="18px" version="1.1" id="Layer_1"
+                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        viewBox="0 0 512.078 512.078" xml:space="preserve">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <g>
+                                <g>
+                                    <g>
+                                        <path
+                                            d="M508.087,2.425c-4.587-3.733-11.307-3.093-15.04,1.493l-306.56,374.827L92.94,284.771 c-4.267-4.053-10.987-4.053-15.04,0.213c-4.053,4.16-4.053,10.667,0,14.827l101.867,102.4c2.027,2.027,4.693,3.093,7.573,3.2 h0.533c2.987-0.107,5.867-1.6,7.787-3.947l314.133-384C513.314,12.985,512.674,6.264,508.087,2.425z">
+                                        </path>
+                                        <path
+                                            d="M387.447,256.291c-5.76,1.28-9.28,7.04-8,12.8c2.987,13.227,4.587,26.773,4.587,40.32 c0,99.947-81.387,181.333-181.333,181.333S21.367,409.358,21.367,309.411S102.754,128.078,202.7,128.078 c27.947-0.107,55.573,6.4,80.533,18.88c5.333,2.56,11.733,0.427,14.293-4.907c2.56-5.227,0.427-11.52-4.8-14.187 c-27.947-13.973-58.773-21.227-90.027-21.12c-111.787,0-202.667,90.88-202.667,202.667S90.914,512.078,202.7,512.078 s202.667-90.88,202.667-202.667c0-15.147-1.707-30.293-5.12-45.12C398.967,258.531,393.207,254.904,387.447,256.291z">
+                                        </path>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                    verified
+                </span>
+                <img class="h-48 w-full object-cover object-end"
+                    src="https://images.unsplash.com/photo-1570797197190-8e003a00c846?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=968&q=80"
+                    alt="Home in Countryside" />
+                <div class="p-6">
+                    <div class="flex items-baseline">
+                        <span
+                            class="inline-block bg-teal-200 text-teal-800 py-1 px-4 text-xs rounded-full uppercase font-semibold tracking-wide">New</span>
+                        <div class="ml-2 text-gray-600 text-xs uppercase font-semibold tracking-wide">
+                            3 beds &bull; 2 baths
+                        </div>
+                    </div>
+                    <h4 class="mt-2 font-semibold text-lg leading-tight truncate">{{property.PropertyName }}</h4>
+                    <div class="mt-1">
+                        <span> {{property.PropertyType }}: </span>
+                        <span>{{property.PropertyPrice }} Xof</span>
+                        <span class="text-gray-600 text-sm">/month</span>
+                    </div>
+                    <div class="flex  mt-1">
+                        <span><svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px"
+                                viewBox="0 0 395.71 395.71" xml:space="preserve">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <g>
+                                        <path
+                                            d="M197.849,0C122.131,0,60.531,61.609,60.531,137.329c0,72.887,124.591,243.177,129.896,250.388l4.951,6.738 c0.579,0.792,1.501,1.255,2.471,1.255c0.985,0,1.901-0.463,2.486-1.255l4.948-6.738c5.308-7.211,129.896-177.501,129.896-250.388 C335.179,61.609,273.569,0,197.849,0z M197.849,88.138c27.13,0,49.191,22.062,49.191,49.191c0,27.115-22.062,49.191-49.191,49.191 c-27.114,0-49.191-22.076-49.191-49.191C148.658,110.2,170.734,88.138,197.849,88.138z">
+                                        </path>
+                                    </g>
+                                </g>
+                            </svg></span>
+                        <span class="text-gray-600 text-sm">{{property.PropertyLocation }}</span>
+                    </div>
+                    <div class="mt-2 flex items-center">
+                        <span class="text-teal-600 font-semibold">
+                            <span>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </span>
+                        </span>
+                        <span class="ml-2 text-gray-600 text-sm">34 reviews</span>
+                    </div>
+                    <div class="mt-1 flex items-center gap-1">
+                        <span><img class="object-cover w-8 h-8 rounded-full"
+                                src="https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=aa3a807e1bbdfd4364d1f449eaa96d82"
+                                alt="" aria-hidden="true" /></span>
+                        <span class="text-gray-600 text-sm">{{property.OwnerId.firstName}}
+                            {{property.OwnerId.SureName}}</span>
+                        <span class="text-sm font-bold text-red-200 hover:text-red-500">
+                            <a role="button" data-modal-target="default-modal" data-modal-toggle="default-modal"
+                                href="#">View &rarr;</a>
+                        </span>
+                        <!-- Main modal -->
+                        <div id="default-modal" tabindex="-1" aria-hidden="true"
+                            class="hidden overflow-y-auto overflow-x-hidden fixed top-20 right-0 left-0 z-50 flex justify-center items-center h-[40rem] w-[120rem]">
+                            <section class="pt-16 bg-blueGray-50">
+                                <div class="w-full lg:w-4/12 px-4 mx-auto">
+                                    <div
+                                        class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
+                                        <div class="px-6">
+                                            <div class="flex flex-wrap justify-center">
+                                                <div class="w-full px-4 flex justify-center">
+                                                    <div class=" flex justify-center items-center">
+                                                        <div class="mt-1 flex items-center">
+                                                            <span
+                                                                class="bg-teal-600 text-teal-800 m-2 flex inline-block rounded border border-transparent py-1 px-2.5 text-xs font-medium"><svg
+                                                                    fill="#000000" height="18px" width="18px"
+                                                                    version="1.1" id="Layer_1"
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                    viewBox="0 0 512.078 512.078" xml:space="preserve">
+                                                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                                        stroke-linejoin="round"></g>
+                                                                    <g id="SVGRepo_iconCarrier">
+                                                                        <g>
+                                                                            <g>
+                                                                                <g>
+                                                                                    <path
+                                                                                        d="M508.087,2.425c-4.587-3.733-11.307-3.093-15.04,1.493l-306.56,374.827L92.94,284.771 c-4.267-4.053-10.987-4.053-15.04,0.213c-4.053,4.16-4.053,10.667,0,14.827l101.867,102.4c2.027,2.027,4.693,3.093,7.573,3.2 h0.533c2.987-0.107,5.867-1.6,7.787-3.947l314.133-384C513.314,12.985,512.674,6.264,508.087,2.425z">
+                                                                                    </path>
+                                                                                    <path
+                                                                                        d="M387.447,256.291c-5.76,1.28-9.28,7.04-8,12.8c2.987,13.227,4.587,26.773,4.587,40.32 c0,99.947-81.387,181.333-181.333,181.333S21.367,409.358,21.367,309.411S102.754,128.078,202.7,128.078 c27.947-0.107,55.573,6.4,80.533,18.88c5.333,2.56,11.733,0.427,14.293-4.907c2.56-5.227,0.427-11.52-4.8-14.187 c-27.947-13.973-58.773-21.227-90.027-21.12c-111.787,0-202.667,90.88-202.667,202.667S90.914,512.078,202.7,512.078 s202.667-90.88,202.667-202.667c0-15.147-1.707-30.293-5.12-45.12C398.967,258.531,393.207,254.904,387.447,256.291z">
+                                                                                    </path>
+                                                                                </g>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </svg>
+                                                                verified
+                                                            </span>
+                                                        </div>
+                                                        <img alt="..."
+                                                            src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.imdb.com%2Ftitle%2Ftt0388629%2F&psig=AOvVaw29bhpfTh4r1lb7QfxrezBN&ust=1719659374160000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCJCausSU_oYDFQAAAAAdAAAAABAE"
+                                                            class="shadow-xl w-[10%] h-[10rem] rounded-full h-auto border-2 align-middle border-none  -m-16 -ml-20 lg:-ml-16 ">
+                                                    </div>
+                                                </div>
+                                                <div class="w-full flex flex-col  px-4 text-center items-center  mt-20">
+                                                    <div class="flex justify-center py-4 lg:pt-4 pt-8">
+                                                        <div class="mr-4 p-3 text-center">
+                                                            <span
+                                                                class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
+                                                                22
+                                                            </span>
+                                                            <span class="text-sm text-blueGray-400">Sells</span>
+                                                        </div>
+                                                        <div class="mr-4 p-3 text-center">
+                                                            <span
+                                                                class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
+                                                                10
+                                                            </span>
+                                                            <span class="text-sm text-blueGray-400">Rents</span>
+                                                        </div>
+                                                        <div class="lg:mr-4 p-3  text-center ">
+                                                            <span
+                                                                class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
+                                                                89
+                                                            </span>
+                                                            <span class="text-sm text-blueGray-400">Good </span>
+                                                            <span class="text-sm text-blueGray-400">opinions </span>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-center mt-12">
+                                                <h3
+                                                    class="text-xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
+                                                    Bob clean
+                                                </h3>
+                                                <div
+                                                    class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
+                                                    <i class="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
+                                                    kara, Togo
+                                                </div>
+
+                                            </div>
+                                            <div class="mt-10 py-10 border-t border-blueGray-200 text-center">
+                                                <div class="flex flex-wrap justify-center">
+                                                    <div class="w-full lg:w-9/12 px-4">
+                                                        <p class="mb-4 text-lg leading-relaxed text-blueGray-700">
+                                                            An artist of considerable range, Jenna the name taken
+                                                            by Melbourne-raised, Brooklyn-based Nick Murphy
+                                                            writes, performs and records all of his own music,
+                                                            giving it a warm, intimate feel with a solid groove
+                                                            structure. An artist of considerable range.
+                                                        </p>
+                                                        <a href="" data-modal-hide="default-modal"
+                                                            class="font-normal text-pink-500">
+                                                            close
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <footer class="relative  pt-8 pb-6 mt-8">
+                                    <div class="container mx-auto px-4">
+                                        <div class="flex flex-wrap items-center md:justify-between justify-center">
+                                            <div class="w-full md:w-6/12 px-4 mx-auto text-center">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </footer>
+                            </section>
+                        </div>
+
+                    </div>
+                    <hr class="my-3">
+                    <button
+                        class="h-[3.2rem] w-[60%] rounded-lg text-xl tex bg-gray-550 shadow-lg hover:bg-gray-600">Rent
+                        Request
+                    </button>
+                </div>
+            </div>
+
+            {% endfor %}
+
+            <!-- Ajoutez d'autres cartes ici -->
+            <div class="bg-white rounded-lg overflow-hidden shadow-2xl w-[90%] h-[30rem]">
+                <img class="h-48 w-full object-cover object-end"
+                    src="https://images.unsplash.com/photo-1570797197190-8e003a00c846?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=968&q=80"
+                    alt="Home in Countryside" />
+                <div class="p-6">
+                    <div class="flex items-baseline">
+                        <span
+                            class="inline-block bg-teal-200 text-teal-800 py-1 px-4 text-xs rounded-full uppercase font-semibold tracking-wide">New</span>
+                        <div class="ml-2 text-gray-600 text-xs uppercase font-semibold tracking-wide">
+                            3 beds &bull; 2 baths
+                        </div>
+                    </div>
+                    <h4 class="mt-2 font-semibold text-lg leading-tight truncate">Beautiful Home in the countryside</h4>
+                    <div class="mt-1">
+                        <span>$1,900.00</span>
+                        <span class="text-gray-600 text-sm">/ wk</span>
+                    </div>
+                    <div class="mt-2 flex items-center">
+                        <span class="text-teal-600 font-semibold">
+                            <span>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </span>
+                        </span>
+                        <span class="ml-2 text-gray-600 text-sm">34 reviews</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg overflow-hidden shadow-2xl w-[90%] h-[30rem]">
+                <img class="h-48 w-full object-cover object-end"
+                    src="https://images.unsplash.com/photo-1570797197190-8e003a00c846?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=968&q=80"
+                    alt="Home in Countryside" />
+                <div class="p-6">
+                    <div class="flex items-baseline">
+                        <span
+                            class="inline-block bg-teal-200 text-teal-800 py-1 px-4 text-xs rounded-full uppercase font-semibold tracking-wide">New</span>
+                        <div class="ml-2 text-gray-600 text-xs uppercase font-semibold tracking-wide">
+                            3 beds &bull; 2 baths
+                        </div>
+                    </div>
+                    <h4 class="mt-2 font-semibold text-lg leading-tight truncate">Beautiful Home in the countryside</h4>
+                    <div class="mt-1">
+                        <span>$1,900.00</span>
+                        <span class="text-gray-600 text-sm">/ wk</span>
+                    </div>
+                    <div class="mt-2 flex items-center">
+                        <span class="text-teal-600 font-semibold">
+                            <span>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </span>
+                        </span>
+                        <span class="ml-2 text-gray-600 text-sm">34 reviews</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg overflow-hidden shadow-2xl w-[90%] h-[30rem]">
+                <img class="h-48 w-full object-cover object-end"
+                    src="https://images.unsplash.com/photo-1570797197190-8e003a00c846?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=968&q=80"
+                    alt="Home in Countryside" />
+                <div class="p-6">
+                    <div class="flex items-baseline">
+                        <span
+                            class="inline-block bg-teal-200 text-teal-800 py-1 px-4 text-xs rounded-full uppercase font-semibold tracking-wide">New</span>
+                        <div class="ml-2 text-gray-600 text-xs uppercase font-semibold tracking-wide">
+                            3 beds &bull; 2 baths
+                        </div>
+                    </div>
+                    <h4 class="mt-2 font-semibold text-lg leading-tight truncate">Beautiful Home in the countryside</h4>
+                    <div class="mt-1">
+                        <span>$1,900.00</span>
+                        <span class="text-gray-600 text-sm">/ wk</span>
+                    </div>
+                    <div class="mt-2 flex items-center">
+                        <span class="text-teal-600 font-semibold">
+                            <span>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </span>
+                        </span>
+                        <span class="ml-2 text-gray-600 text-sm">34 reviews</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endblock body %}
+
+
+
+
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modalToggles = document.querySelectorAll('[data-modal-toggle]');
+            const modalHides = document.querySelectorAll('[data-modal-hide]');
+
+            modalToggles.forEach(toggle => {
+                toggle.addEventListener('click', event => {
+                    event.preventDefault();
+                    const modalId = toggle.getAttribute('data-modal-target');
+                    const modal = document.getElementById(modalId);
+                    if (modal) {
+                        modal.classList.remove('hidden');
+                    }
+                });
+            });
+
+            modalHides.forEach(hide => {
+                hide.addEventListener('click', () => {
+                    const modalId = hide.getAttribute('data-modal-hide');
+                    const modal = document.getElementById(modalId);
+                    if (modal) {
+                        modal.classList.add('hidden');
+                    }
+                });
+            });
+        });
+    </script>
+    {% block banScript %}
+     <script>
+        const rangeInput = document.getElementById('priceRange');
+        const priceValue = document.getElementById('priceValue');
+
+        rangeInput.addEventListener('input', (event) => {
+            price.textContent = event.target.value;
+        });
+    </script>
+    {% endblock banScript %}
+   
+</body>
+
+</html>

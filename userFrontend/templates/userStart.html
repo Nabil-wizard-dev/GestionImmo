@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <title>Document</title>
+</head>
+<body>
+<header class="fixed w-full z-10 py-2 bg-white shadow-md dark:bg-gray-800">
+        <div class="row flex w-full justify-between items-center px-6">
+            <div class="col-span-4">
+                <img src="" alt="">
+                <span class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200">EasyImmo</span>
+            </div>
+            <div class="col-span-5">
+                <ul class="flex">
+                    <li class="mb-1">
+                        <a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
+                            href="#">Home</a>
+                    </li>
+                    <li class="mb-1">
+                        <a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
+                            href="#">About Us</a>
+                    </li>
+                    <li class="mb-1">
+                        <a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
+                            href="#">Services</a>
+                    </li>
+                    <li class="mb-1">
+                        <a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
+                            href="#">Pricing</a>
+                    </li>
+                    <li class="mb-1">
+                        <a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
+                            href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-span-3 flex items-center justify-center">
+                <ul class="flex space-x-3 flex items-center justify-center">
+                    <li class="mb-1">
+                        <a class="block px-4 py-2  leading-loose text-xs text-center text-white font-semibold bg-purple-600 active:bg-purple-600 hover:bg-purple-700  rounded-lg"
+                            href="#">Sign In</a>
+                    </li>
+                    <li class="mb-1">
+                        <a class="block px-4 py-2  leading-loose text-xs text-center text-white font-semibold bg-purple-600 active:bg-purple-600 hover:bg-purple-700  rounded-lg"
+                            href="#">Sign Up</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <div class="flex-col items-center min-w-full" style="margin-right: 0px; margin-left: 0px;">
+        <section
+            class="flex-col inline-flex h-screen w-full  text-black font-bold text-center justify-center items-center bg-gray-50 dark:bg-gray-700 overflow-hidden"
+            id="Home" style="background:url('{% static 'assets\img\houses\immostyle_slider.jpg' %}') center no-repeat;">
+                <div class="container w-10 mx-6 px-6">
+            <div class="text-6xl font-bold text-black mb-2">EasyImmo</div>
+            <p class="text-base mb-2 ">{% lorem 1.5 %}</p>
+            <div class="col-span-3 flex items-center justify-center">
+                <ul class="flex space-x-3 flex items-center justify-center">
+                    <li class="mb-1">
+                        <a class="block px-4 py-2  leading-loose text-xs text-center text-white font-semibold bg-purple-600 active:bg-purple-600 hover:bg-purple-700  rounded-lg"
+                            href="{% url 'login' %}">Sign In</a>
+                    </li>
+                    <li class="mb-1">
+                        <a class="block px-4 py-2  leading-loose text-xs text-center text-white font-semibold bg-purple-600 active:bg-purple-600 hover:bg-purple-700  rounded-lg"
+                            href="#About">About us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+            </section>
+        <section
+            class="inline-flex h-screen w-full text-black font-bold text-center justify-center items-center bg-gray-50 dark:bg-gray-900"
+            id="About">About</section>
+        <section
+            class=" inline-flex  h-screen w-full text-black font-bold text-center justify-center items-center bg-gray-50 dark:bg-gray-900"
+            id="Services">Services</section>
+        <section
+            class=" inline-flex  h-screen w-full text-black font-bold text-center justify-center items-center bg-gray-50 dark:bg-gray-900"
+            id="Portfolio">Portfolio</section>
+        <section
+            class=" inline-flex  h-screen w-full text-black font-bold text-center justify-center items-center bg-gray-50 dark:bg-gray-900"
+            id="Contact">Contact</section>
+    </div>
+</body>
+
+</html>

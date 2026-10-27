@@ -1,0 +1,51 @@
+{% extends "ownerManagementCenter.html" %}
+
+{% block content %}
+
+    <!-- adding form -->
+    <div class="container mx-auto px-2 py-8 mt-[4%] ">
+        <h2 class="text-2xl font-bold mb-6 text-center">Create Property</h2>
+        <form method="POST" enctype="multipart/form-data" class="bg-white shadow-md rounded px-8 pt-4 pb-4 mb-4 ring-2 ring-gray-700">
+            {% csrf_token %}
+            {% comment %} <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="id_owner">Owner</label>
+                {{ form.owner|as_widget }}
+            </div> {% endcomment %}
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="id_property_type">Property Type</label>
+                {{ form.PropertyType }}
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="id_property_images">Property Images</label>
+                {{ form.PropertyImages }}
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="id_property_price">Property Price</label>
+                {{ form.PropertyPrice }}
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="id_property_name">Property Name</label>
+                {{ form.PropertyName }}
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="id_property_location">Property Location</label>
+                {{ form.PropertyLocation }}
+            </div>
+            {% comment %} <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="id_property_images">Property owming proofs</label>
+                {{ form.PropertyOwningFiles }}
+            </div> {% endcomment %}
+             <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="id_property_images">Property owming proofs</label>
+                <input type="file" multiple name="PropertyOwningFiles" id="files"class="form-control block w-full px-3 py-2 text-base text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-indigo-500 sm:text-base">
+            </div> 
+
+            <div class="flex items-center justify-center">
+                <button class="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" type="submit">
+                    Save Data 
+                </button>
+            </div>
+        </form>
+    </div>
+
+{% endblock content %}

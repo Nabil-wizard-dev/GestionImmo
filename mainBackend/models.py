@@ -43,11 +43,18 @@ class Rental(Operation):
         verbose_name_plural = 'Rentals'
 
 class Property(models.Model):
-    OwnerId = models.ForeignKey("Owner",on_delete=models.CASCADE)
-    PropertyType = models.CharField(max_length=30)
+    statusChoicesVar = [(True,'verified'),
+                        (False,'unverified')]
+    PropertyTypeVar = [(Sell,'Sell'),
+                        (Rental,'Rental')]
+    OwnerId = models.ForeignKey("Owner",on_delete=models.CASCADE, null=True, blank=True, default=None)
+    PropertyType = models.CharField(max_length=30,choices=PropertyTypeVar)
     PropertyImages = models.FileField(upload_to='property_files/', validators=[FileExtensionValidator(allowed_extensions=['jpg', 'png'])], blank=True, null=True)
+    PropertyOwningFiles = models.FileField(upload_to='propertyOwning_files/', validators=[FileExtensionValidator(allowed_extensions=['jpg', 'png','pdf'])], blank=True, null=True,)
+    PropertyPrice = models.IntegerField();
     PropertyName = models.CharField(max_length=50)
     PropertyLocation = models.CharField(max_length=50)
+    verificationStatus = models.BooleanField(choices=statusChoicesVar ,default=False)
 
 
 
@@ -89,7 +96,7 @@ class Transaction(models.Model):
         verbose_name_plural = 'Transactions'
 
 class Contract(models.Model):
-    ContractType = models.CharField()
+    ContractType = models.CharField(max_length=100)
     SignatureDate = models.DateField()
     status = models.BooleanField()
 
@@ -177,7 +184,7 @@ class buyer(User):
 
 class Poster(models.Model):
     PosterPicture = models.FileField()
-    PosterHeader = models.CharField()
+    PosterHeader = models.CharField(max_length=50)
     PosterText = models.TextField()
 
     def __str__(self):
@@ -188,3 +195,15 @@ class Poster(models.Model):
         managed = True
         verbose_name = 'Poster'
         verbose_name_plural = 'Posters'
+        
+class PropertyNotification(models.Model):
+    PropertyId = models.ForeignKey("Property",on_delete=models.CASCADE, null=True, blank=True)
+    
+    def __str__(self):
+        pass
+
+class UserNotification(models.Model):
+    UserId = models.ForeignKey("User",on_delete=models.CASCADE, null=True, blank=True)
+    
+    def __str__(self):
+        pass

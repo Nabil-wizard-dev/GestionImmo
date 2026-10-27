@@ -1,0 +1,397 @@
+{% load static %}
+<!DOCTYPE html>
+<html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'assets/css/tailwind.output.css' %}" />
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
+                defer></script>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="{% static 'assets/js/init-alpine.js' %}"></script>
+        <script src="{% static 'assets/js/focus-trap.js' %}"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <title>clients area</title>
+    </head>
+    <body class="relative overflow-hidden h-screen">
+        <header class="flex flex-col justify-center relative w-full z-90 shadow-md">
+            <nav class="w-full z-80 py-2 bg-white shadow-md dark:bg-gray-800">
+                <div class="row flex w-full justify-center items-center px-6">
+                    <div class="col-span-3">
+                        <img src="" alt="">
+                        <span class="ml-6 text-lg font-bold text-xl text-gray-800 dark:text-gray-200">EasyImmo</span>
+                    </div>
+                </div>
+            </nav>
+            <!-- fin de la header section 1 -->
+            <nav class="w-full h-[3rem] flex justify-center items-center bg-gray-500">
+                <!-- filtring menu section -->
+                <div class="w-[25%] mx-2">
+                    <nav class="w-full flex  justify-around text-center">
+                        <div class="relative inline-block text-left group">
+                            <div class=" hover-trigger inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none ">
+                                Categorie
+                                <svg class="-mr-1 ml-2 h-5 w-5"
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     viewBox="0 0 20 20"
+                                     fill="currentColor"
+                                     aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M5.293 9.293a1 1 0 011.414 0L10 12.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div class="h-[0.1rem]"></div>
+                            <div class=" hover-target origin-top-right absolute z-50 left-0  w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none transform opacity-0 scale-95 transition ease-in-out duration-150 hidden group-hover:block group-hover:opacity-100 group-hover:scale-100">
+                                <div class="bg-white px-4 pb-2 rounded-lg shadow-md w-[95%]">
+                                    <h2 class="text-lg font-semibold mb-1">Categories</h2>
+                                    <ul class="flex gap-5">
+                                        <li class="flex items-center space-x-1">
+                                            <input type="radio"
+                                                   name="category"
+                                                   value="rental"
+                                                   class="form-checkbox h-5 w-5 text-blue-600">
+                                            <label for="size-m" class="text-gray-700">Rental</label>
+                                        </li>
+                                        <li class="flex items-center space-x-1">
+                                            <input type="radio"
+                                                   name="category"
+                                                   value="forsell"
+                                                   class="form-checkbox h-5 w-5 text-blue-600">
+                                            <label for="size-l" class="text-gray-700">For sell</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- price -->
+                        <div class="relative inline-block text-left group">
+                            <div class=" hover-trigger inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none ">
+                                price
+                                <svg class="-mr-1 ml-2 h-5 w-5"
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     viewBox="0 0 20 20"
+                                     fill="currentColor"
+                                     aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M5.293 9.293a1 1 0 011.414 0L10 12.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div class="h-[0.1rem]"></div>
+                            <div class="  hover-target origin-top-right absolute z-50 left-0  w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none transform opacity-0 scale-95 transition ease-in-out duration-150 hidden group-hover:block group-hover:opacity-100 group-hover:scale-100">
+                                <div class="bg-white p-4 rounded-lg shadow-md w-full">
+                                    <h2 class="text-lg font-semibold mb-2">Average price</h2>
+                                    <div class="flex justify-center items-center gap-2 mb-2">
+                                        <span class="block text-xl" id="price">25000</span>
+                                        <span class="block text-xl">fcfa</span>
+                                    </div>
+                                    <div class="relative">
+                                        <input type="range"
+                                               name="price"
+                                               min="20000"
+                                               max="20000000"
+                                               value="1200"
+                                               class="relative w-full h-2 bg-gray-500 rounded-lg appearance-none cursor-pointer"
+                                               id="priceRange">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- preferences -->
+                        <div class="relative inline-block text-left group">
+                            <div class=" hover-trigger inline-flex justify-center  rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none ">
+                                preference
+                                <svg class="-mr-1 ml-2 h-5 w-5"
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     viewBox="0 0 20 20"
+                                     fill="currentColor"
+                                     aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M5.293 9.293a1 1 0 011.414 0L10 12.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div class="h-[0.1rem]"></div>
+                            <div class=" hover-target origin-top-right absolute z-50 left-0  w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none transform opacity-0 scale-95 transition ease-in-out duration-150 hidden group-hover:block group-hover:opacity-100 group-hover:scale-100">
+                                <div class="bg-white p-6 rounded-lg shadow-md w-full">
+                                    <h2 class="text-lg font-semibold mb-4">Number Of Rooms</h2>
+                                    <ul class="space-y-4">
+                                        <li class="flex items-center space-x-2">
+                                            <input type="checkbox"
+                                                   name="rooms"
+                                                   value="studio"
+                                                   id="size-m"
+                                                   class="form-checkbox h-5 w-5 text-blue-600">
+                                            <label for="size-m" class="text-gray-700">Studio</label>
+                                        </li>
+                                        <li class="flex items-center space-x-2">
+                                            <input type="checkbox"
+                                                   name="rooms"
+                                                   value="2"
+                                                   id="size-l"
+                                                   class="form-checkbox h-5 w-5 text-blue-600">
+                                            <label for="size-l" class="text-gray-700">2 rooms</label>
+                                        </li>
+                                        <li class="flex items-center space-x-2">
+                                            <input type="checkbox"
+                                                   name="rooms"
+                                                   value="3"
+                                                   id="size-xl"
+                                                   class="form-checkbox h-5 w-5 text-blue-600">
+                                            <label for="size-xl" class="text-gray-700">3 rooms or more</label>
+                                        </li>
+                                        <li class="flex items-center space-x-2">
+                                            <input type="checkbox"
+                                                   name="rooms"
+                                                   value="house"
+                                                   id="size-xxl"
+                                                   class="form-checkbox h-5 w-5 text-blue-600">
+                                            <label for="size-xxl" class="text-gray-700">Entire house</label>
+                                        </li>
+                                        <li class="flex items-center space-x-2">
+                                            <input type="checkbox"
+                                                   name="rooms"
+                                                   value="all"
+                                                   id="size-2xxl"
+                                                   class="form-checkbox h-5 w-5 text-blue-600">
+                                            <label for="size-xxl" class="text-gray-700">Show all</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+                <!-- search bar part -->
+                <div class="w-[60%] flex justify-center">
+                    <!-- Search input -->
+                    <div class="flex justify-center flex-1 lg:mr-32">
+                        <div class="relative w-full max-w-xl mr-6 focus-within:text-purple-500">
+                            <div class="absolute inset-y-0 flex items-center pl-2">
+                                <svg class="w-5 h-5"
+                                     aria-hidden="true"
+                                     fill="currentColor"
+                                     viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd">
+                                    </path>
+                                </svg>
+                            </div>
+                            <input class="w-full h-[2rem] pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
+                                   type="text"
+                                   placeholder="Search for projects"
+                                   aria-label="Search" />
+                        </div>
+                    </div>
+                </div>
+                <!-- logo and notification bell part -->
+                <div class="relative inline-block text-left group ">
+                    <div class="hover-trigger  rounded-full overflow-hidden  ring-2 ring-black shadow-sm w-[2.8rem] h-[2.8rem] bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none">
+                        <img src="https://images.unsplash.com/photo-1570797197190-8e003a00c846?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=968&q=80"
+                             alt=""
+                             class="w-full h-full">
+                    </div>
+                    <div class="h-[0.1rem]"></div>
+                    <div class="hover-target z-50 fix origin-top-right absolute right-0  w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none transform opacity-0 scale-100 transition ease-in-out duration-150 hidden group-hover:block group-hover:opacity-100 group-hover:scale-100">
+                        <div class="py-1"
+                             role="menu"
+                             aria-orientation="vertical"
+                             aria-labelledby="options-menu">
+                            <a href="#"
+                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                               role="menuitem">Option 1</a>
+                            <a href="#"
+                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                               role="menuitem">Option 2</a>
+                            <a href="#"
+                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                               role="menuitem">Option 3</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <section id="properties"
+                 class="w-full h-full relative grid grid-cols-4 gap-4 justify-center py-[2%] pb-[8%] px-[3%]  mt-[0%]  overflow-hidden overflow-y-scroll z-10">
+            {% for property in properties %}
+                <!-- first card -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-2xl w-[90%] h-[23rem]">
+                    <span class="bg-teal-600 absolute object-left-top text-teal-800 m-2 flex inline-block rounded border border-transparent py-1 px-2.5 text-xs font-medium">
+                        <svg fill="#000000"
+                             height="18px"
+                             width="18px"
+                             version="1.1"
+                             id="Layer_1"
+                             xmlns="http://www.w3.org/2000/svg"
+                             xmlns:xlink="http://www.w3.org/1999/xlink"
+                             viewBox="0 0 512.078 512.078"
+                             xml:space="preserve">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0">
+                            </g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
+                            </g>
+                            <g id="SVGRepo_iconCarrier">
+                            <g>
+                            <g>
+                            <g>
+                            <path d="M508.087,2.425c-4.587-3.733-11.307-3.093-15.04,1.493l-306.56,374.827L92.94,284.771 c-4.267-4.053-10.987-4.053-15.04,0.213c-4.053,4.16-4.053,10.667,0,14.827l101.867,102.4c2.027,2.027,4.693,3.093,7.573,3.2 h0.533c2.987-0.107,5.867-1.6,7.787-3.947l314.133-384C513.314,12.985,512.674,6.264,508.087,2.425z">
+                            </path>
+                            <path d="M387.447,256.291c-5.76,1.28-9.28,7.04-8,12.8c2.987,13.227,4.587,26.773,4.587,40.32 c0,99.947-81.387,181.333-181.333,181.333S21.367,409.358,21.367,309.411S102.754,128.078,202.7,128.078 c27.947-0.107,55.573,6.4,80.533,18.88c5.333,2.56,11.733,0.427,14.293-4.907c2.56-5.227,0.427-11.52-4.8-14.187 c-27.947-13.973-58.773-21.227-90.027-21.12c-111.787,0-202.667,90.88-202.667,202.667S90.914,512.078,202.7,512.078 s202.667-90.88,202.667-202.667c0-15.147-1.707-30.293-5.12-45.12C398.967,258.531,393.207,254.904,387.447,256.291z">
+                            </path>
+                            </g>
+                            </g>
+                            </g>
+                            </g>
+                        </svg>
+                        verified
+                    </span>
+                    <button @click="openModal">
+                        <img class="h-48 w-full object-cover object-end"
+                             src="https://images.unsplash.com/photo-1570797197190-8e003a00c846?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=968&q=80"
+                             alt="Home in Countryside" />
+                    </button>
+                    <!-- Modal backdrop. This what you want to place close to the closing body tag -->
+                    <div x-show="isModalOpen"
+                         x-transition:enter="transition ease-out duration-150"
+                         x-transition:enter-start="opacity-0"
+                         x-transition:enter-end="opacity-100"
+                         x-transition:leave="transition ease-in duration-150"
+                         x-transition:leave-start="opacity-100"
+                         x-transition:leave-end="opacity-0"
+                         class="fixed inset-0 z-30 flex items-end bg-black bg-opacity-50 sm:items-center sm:justify-center">
+                        <!-- Modal -->
+                        <div x-show="isModalOpen"
+                             x-transition:enter="transition ease-out duration-150"
+                             x-transition:enter-start="opacity-0 transform translate-y-1/2"
+                             x-transition:enter-end="opacity-100"
+                             x-transition:leave="transition ease-in duration-150"
+                             x-transition:leave-start="opacity-100"
+                             x-transition:leave-end="opacity-0  transform translate-y-1/2"
+                             @click.away="closeModal"
+                             @keydown.escape="closeModal"
+                             class="w-full px-6 py-4 overflow-hidden bg-white rounded-t-lg dark:bg-gray-800 sm:rounded-lg sm:m-4 sm:max-w-xl"
+                             role="dialog"
+                             id="modal">
+                            <!-- Remove header if you don't want a close icon. Use modal body to place modal tile. -->
+                            <header class="flex justify-end">
+                                <button class="inline-flex items-center justify-center w-6 h-6 text-gray-400 transition-colors duration-150 rounded dark:hover:text-gray-200 hover: hover:text-gray-700"
+                                        aria-label="close"
+                                        @click="closeModal">
+                                    <svg class="w-4 h-4"
+                                         fill="currentColor"
+                                         viewBox="0 0 20 20"
+                                         role="img"
+                                         aria-hidden="true">
+                                        <path d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" fill-rule="evenodd">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </header>
+                            <!-- Modal body -->
+                            <div class="mt-4 mb-6">
+                                <!-- Modal title -->
+                                <p class="mb-2 text-lg text-center font-semibold text-gray-700 dark:text-gray-300">Request !!!</p>
+                                <!-- Modal description -->
+                                <p class="text-lg text-center text-gray-700 dark:text-gray-400">
+                                    Do you want to send a
+                                    {% if  property.PropertyType  == 'rental' %}
+                                        rent request ??
+                                    {% elif property.PropertyType  == 'sell' %}
+                                        Buy request ??
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <footer class="flex flex-col items-center justify-end px-6 py-3 -mx-6 -mb-4 space-y-4 sm:space-y-0 sm:space-x-6 sm:flex-row bg-gray-50 dark:bg-gray-800">
+                                <button @click="closeModal"
+                                        class="w-full px-5 py-3 text-sm font-medium leading-5 text-white text-gray-700 transition-colors duration-150 border border-gray-300 rounded-lg dark:text-gray-400 sm:px-4 sm:py-2 sm:w-auto active:bg-transparent hover:border-gray-500 focus:border-gray-500 active:text-gray-500 focus:outline-none focus:shadow-outline-gray">
+                                    Cancel
+                                </button>
+                                <button class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                                    Send
+                                </button>
+                            </footer>
+                        </div>
+                    </div>
+                    <!-- End of modal backdrop -->
+                    <div class="px-6 flex flex-col gap-2">
+                        <h4 class="mt-2 font-bold text-lg leading-tight truncate">{{ property.PropertyName }}</h4>
+                        <div class="mt-1">
+                            <span>{{ property.PropertyType }}:</span>
+                            <span>{{ property.PropertyPrice }} Xof</span>
+                            <span class="text-gray-600 text-sm">/month</span>
+                        </div>
+                        <div class="flex  mt-1">
+                            <span>
+                                <svg fill="#000000"
+                                     version="1.1"
+                                     id="Capa_1"
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     width="20px"
+                                     height="20px"
+                                     viewBox="0 0 395.71 395.71"
+                                     xml:space="preserve">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0">
+                                    </g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
+                                    </g>
+                                    <g id="SVGRepo_iconCarrier">
+                                    <g>
+                                    <path d="M197.849,0C122.131,0,60.531,61.609,60.531,137.329c0,72.887,124.591,243.177,129.896,250.388l4.951,6.738 c0.579,0.792,1.501,1.255,2.471,1.255c0.985,0,1.901-0.463,2.486-1.255l4.948-6.738c5.308-7.211,129.896-177.501,129.896-250.388 C335.179,61.609,273.569,0,197.849,0z M197.849,88.138c27.13,0,49.191,22.062,49.191,49.191c0,27.115-22.062,49.191-49.191,49.191 c-27.114,0-49.191-22.076-49.191-49.191C148.658,110.2,170.734,88.138,197.849,88.138z">
+                                    </path>
+                                    </g>
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="text-gray-600 text-sm">{{ property.PropertyLocation }}</span>
+                        </div>
+                        <div class="mt-1 flex items-center gap-1">
+                            <span>
+                                <img class="object-cover w-8 h-8 rounded-full"
+                                     src="https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=aa3a807e1bbdfd4364d1f449eaa96d82"
+                                     alt=""
+                                     aria-hidden="true" />
+                            </span>
+                            <span class="text-gray-600 text-sm">{{ property.OwnerId.firstName }}
+                            {{ property.OwnerId.SureName }}</span>
+                            <span class="text-sm font-bold text-red-200 hover:text-red-500">
+                                <a role="button"
+                                   data-modal-target="default-modal"
+                                   data-modal-toggle="default-modal"
+                                   href="#">View
+                                &rarr;</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </section>
+       <script type="text/javascript">
+        $(document).ready(function() {
+            $('input[name="category"], input[name="price"], input[name="preference"]').on('change', function() {
+                var category = $('input[name="category"]:checked').val();
+                var price = $('input[name="price"]').val();
+                var preference = $('input[name="preference"]:checked').val();
+
+                $.ajax({
+                    url: "{% url 'filter_properties' %}",
+                    data: {
+                        'category': category,
+                        'price': price,
+                        'preference': preference
+                    },
+                    success: function(response) {
+                        var propertiesDiv = $('#properties');
+                        propertiesDiv.empty();
+                        response.properties.forEach(function(property) {
+                            propertiesDiv.append('<div>' + property.PropertyName + '</div>');
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        const rangeInput = document.getElementById('priceRange');
+        const priceValue = document.getElementById('price');
+
+        rangeInput.addEventListener('input', (event) => {
+            priceValue.textContent = event.target.value;
+        });
+    </script>
+    </body>
+</html>
